@@ -1,0 +1,53 @@
+<source>
+  # http://docs.fluentd.org/articles/in_forward
+  @type forward
+  port 24224
+</source>
+
+<match nginx.**>
+  @type "aws-elasticsearch-service"
+  type_name "nginx_log"
+  logstash_format true
+  include_tag_key true
+  tag_key "@log_name"
+  flush_interval 5s
+
+  <endpoint>
+    url ES_ENDPOINT
+    region us-east-1
+    access_key_id "AWS_ACCESS_KEY"
+    secret_access_key "AWS_SECRET_KEY"
+  </endpoint>
+</match>
+
+<match docker.**>
+  @type "aws-elasticsearch-service"
+  type_name "docker_log"
+  logstash_format true
+  include_tag_key true
+  tag_key "@log_name"
+  flush_interval 5s
+
+  <endpoint>
+    url ES_ENDPOINT
+    region us-east-1
+    access_key_id "AWS_ACCESS_KEY"
+    secret_access_key "AWS_SECRET_KEY"
+  </endpoint>
+</match>
+
+<match autoscale.**>
+  @type "aws-elasticsearch-service"
+  type_name "autoscale_log"
+  logstash_format true
+  include_tag_key true
+  tag_key "@log_name"
+  flush_interval 5s
+
+  <endpoint>
+    url ES_ENDPOINT
+    region us-east-1
+    access_key_id "AWS_ACCESS_KEY"
+    secret_access_key "AWS_SECRET_KEY"
+  </endpoint>
+</match>

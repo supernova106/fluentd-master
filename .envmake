@@ -1,0 +1,4 @@
+export PROJECT_NAME=$(basename `git rev-parse --show-toplevel`)
+export BRANCH_NAME=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD | sed 's#\/#-#g')
+export TIMESTAMP=$(date +%s)
+export DOCKER_REGISTRY='private-registry.mi.razerapi.com'
